@@ -38,7 +38,7 @@
         <div class="hero-copy">
           <p class="eyebrow" data-market-line>Gaithersburg to West Baltimore · Maryland</p>
           <h1 id="headline" data-headline>Baltimore's Top-Rated Residential &amp; Commercial <em>Concrete Contractor</em></h1>
-          <p class="lead" data-intro>We pour driveways, patios, slabs, foundations and concrete walls for homeowners and businesses. I’m the owner of Titan Concrete Pros. I write every estimate and manage every job.</p>
+          <p class="lead" data-intro>Driveways, patios, pool decks, sidewalks and walkways poured right the first time. We also pour slabs, flatwork, equipment pads, foundations, footings and concrete walls, including retaining walls. We install waterproofing systems and handle <strong>repair, cleaning, pressure washing and sealing</strong>. Choose from brush finishes, exposed aggregate, stamped concrete and epoxy coatings. Licensed, insured and locally owned, with a <strong>clear, upfront price</strong> before any work begins.</p>
           <ul class="hero-points"><li>Licensed &amp; insured</li><li>Same-week quotes</li><li>English &amp; español</li><li>Serving Maryland since 2015</li></ul>
           <a class="button" href="tel:+14439633664" data-phone>Call <span data-contact-value>443-963-3664</span></a>
         </div>
@@ -92,13 +92,6 @@
       <div id="residential-services">
         <div class="service-grid" id="service-grid"></div>
       </div>
-      <article class="commercial-card" id="commercial-services" aria-labelledby="commercial-title">
-        <div>
-          <h3 id="commercial-title">Commercial Concrete Services</h3>
-          <p>We pour equipment pads, slabs, walkways and concrete walls for Maryland businesses. I handle the estimate and coordinate site access and the pour schedule with you.</p>
-        </div>
-        <a class="button" href="#quote" data-quote>Get a commercial estimate <span aria-hidden="true">↗</span></a>
-      </article>
       <aside class="finish-panel" id="finishes">
         <div><p class="eyebrow">Finishes and coatings</p><h3>Choose a surface that suits the job.</h3></div>
         <dl id="finish-list"></dl>
@@ -106,9 +99,10 @@
     </section>
     <section class="section projects" aria-labelledby="projects-title">
       <div class="wrap">
-        <p class="eyebrow">Project gallery</p><h2 id="projects-title">Concrete Project Examples</h2>
-        <p class="gallery-note">Illustrative photos show the types of concrete work we offer.</p>
-        <div id="project-grid" class="project-grid"></div>
+        <h2 id="projects-title">Recent Concrete Projects</h2>
+        <p class="gallery-note">Recent projects we have completed for clients in Howard and Montgomery counties. Call our team today to start planning your project.</p>
+        <a class="button projects-call" href="tel:+14439633664" data-phone>Call <span data-contact-value>443-963-3664</span></a>
+        <div id="project-grid" class="project-grid" hidden></div>
         <details class="more-projects" id="more-projects" hidden>
           <summary>See more concrete projects</summary>
           <div id="more-project-grid" class="project-grid"></div>
@@ -148,7 +142,14 @@
       </div>
     </section>
     <section class="section wrap local-grid" aria-labelledby="area-title">
-      <div><p class="eyebrow">Service area</p><h2 id="area-title">Where we work in Maryland</h2><p id="area-copy"></p><ul class="locations" id="locations"></ul></div>
+      <div>
+        <p class="eyebrow">Service area</p><h2 id="area-title">Where we work in Maryland</h2><p id="area-copy"></p>
+        <figure class="coverage-map">
+          <img src="titan-baltimore-assets/images/service-area-map.webp" width="760" height="580" loading="lazy" decoding="async" alt="Map highlighting Montgomery County and Howard County in Maryland, with Gaithersburg and Columbia marked.">
+          <figcaption>Howard and Montgomery counties are highlighted. Boundaries from Maryland iMAP.</figcaption>
+        </figure>
+        <ul class="locations" id="locations"></ul>
+      </div>
       <div><p class="eyebrow">Frequently asked questions</p><h2 id="faq-title">Before you request a quote</h2><div id="faq"></div></div>
     </section>
   </main>
