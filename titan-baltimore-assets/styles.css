@@ -200,6 +200,3 @@ summary { cursor: pointer; font-weight: 750; }
   html { scroll-behavior: auto; }
   .quote.highlight { animation: none; outline: 3px solid var(--orange); }
 }
-@media (min-width: 901px) {
-  .project-options .other-choice { grid-area: 1 / 4; }
-}

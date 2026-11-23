@@ -150,6 +150,7 @@ const icons = {
   road: "M5 22 9 2m10 20L15 2m-3 2v3m0 3v4m0 3v4M2 22h20",
   walk: "M3 20h18M5 15h14M7 10h10m-7-6h4M9 4 3 20m12-16 6 16",
   slab: "m2 10 10-6 10 6-10 6-10-6Zm0 0v4l10 6 10-6v-4m-10 6v4",
+  commercial: "M3 21h18M4 21V4h11v17m0-13h5v13M7 8h1m3 0h1m-5 4h1m3 0h1m-5 9v-5h5v5m5-9h1m-1 4h1",
   pool: "M3 16h18v5H3zm3 0V5a2 2 0 0 1 4 0m3 11V5a2 2 0 0 1 4 0M6 9h7m-7 4h7",
   foundation: "M3 18h18v4H3zM6 18V8h12v10M4 8l8-6 8 6M10 18v-5h4v5",
   wall: "M2 9h20v12H2zM2 15h20M9 9v6m6 0v6m-9-18h12",
@@ -223,7 +224,6 @@ function renderStep(focus = false) {
       const card = node("button", "", "choice");
       card.type = "button";
       card.dataset.choice = value;
-      if (projectStep && choice.id === "other") card.classList.add("other-choice");
       card.classList.toggle("selected", answers[step.key] === value);
       card.setAttribute("aria-pressed", String(answers[step.key] === value));
       card.append(icon(choice.icon), node("span", choice.label));
@@ -326,8 +326,12 @@ form.addEventListener("submit", async (event) => {
   }
   const project = company.projectTypes.find(({ id }) => id === answers.project);
   const notes = panel.querySelector("#notes");
+  // The original Apps Script accepts Other and prints the selected service separately.
+  const isCommercial = project.id === "commercial";
+  const projectCategory = isCommercial ? "other" : project.id;
+  const service = requestedService || (isCommercial ? "Commercial Concrete Services" : "");
   const payload = window.TitanLeadForm.buildPayload(
-    { ...answers, notes: notes.value }, requestedService, form.elements.website.value
+    { ...answers, project: projectCategory, notes: notes.value }, service, form.elements.website.value
   );
 
   submitting = true;
