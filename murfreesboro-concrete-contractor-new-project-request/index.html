@@ -333,7 +333,27 @@ tbody th{font-weight:700;width:42%}
 /* backstop: never let anything widen the page sideways */
 body{overflow-x:clip}
 
+/* Estimate quiz inside the existing Murfreesboro quote card */
+#estimate [hidden]{display:none!important}
+.quiz-question{font-size:clamp(1.24rem,2.3vw,1.55rem);margin:.5rem 0 .75rem}
+.quiz-selection{font-size:.88rem;font-weight:750;color:var(--oxide-d);margin:.45rem 0}
+.quiz-back{min-height:44px;border:0;background:transparent;color:var(--ink);font:700 .95rem var(--f);padding:0 .25rem;cursor:pointer}
+.quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.quiz-projects{grid-template-columns:repeat(4,minmax(0,1fr))}
+.quiz-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-height:76px;padding:.4rem .2rem;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);font:700 .78rem/1.2 var(--f);text-align:center;overflow-wrap:anywhere;cursor:pointer}
+.quiz-choice:hover,.quiz-choice[aria-pressed=true]{border-color:var(--oxide);background:#fcf3ee}
+.quiz-choice svg{width:25px;height:25px;color:var(--oxide);flex:none}
+.quiz-progress{display:block;width:100%;height:.45rem;margin-top:1rem;accent-color:var(--oxide)}
+.quiz-step-count,.quiz-status{font-size:.88rem;margin:.4rem 0 0}
+.quiz-step-count{color:var(--ink-2)}
+.quiz-status{color:var(--oxide-d)}
+.quiz-status:empty{display:none}
+#estimate .submit:disabled{opacity:.65;cursor:wait}
+@media(max-width:520px){.quiz-projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
+<script defer src="/titan-baltimore-assets/form-handler.js"></script>
+<script defer src="/murfreesboro-concrete-contractor-new-project-request/quote-quiz.js"></script>
 </head>
 <body>
 <a class="skip" href="#estimate">Skip to the free estimate form</a>
@@ -388,54 +408,21 @@ body{overflow-x:clip}
     </div>
 
     <div class="card" id="estimate" tabindex="-1">
-      <form id="lead" name="concrete-project-request" method="POST" action="/murfreesboro-concrete-contractor-new-project-request/thanks.html" data-netlify="true" netlify-honeypot="company" novalidate>
-        <input type="hidden" name="form-name" value="concrete-project-request">
-        <input type="hidden" name="variant" value="">
-        <input type="hidden" name="lead_tier" value="">
-        <input type="hidden" name="est_sqft" value="">
-        <input type="hidden" name="gclid" value="">
-        <input type="hidden" name="utm_source" value="">
-        <input type="hidden" name="utm_campaign" value="">
-        <input type="hidden" name="utm_term" value="">
-        <input type="hidden" name="landing_url" value="">
-        <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
-
-        <h2 class="card-h">Get your free estimate</h2>
-        <p class="card-s">Takes 30 seconds. We call you back to book a free visit.</p>
-
-        <div class="two">
-          <div class="fld">
-            <label for="f-name">Name</label>
-            <input id="f-name" name="name" autocomplete="name" required>
-            <span class="err" data-for="name" aria-live="polite"></span>
-          </div>
-          <div class="fld">
-            <label for="f-phone">Phone</label>
-            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
-            <span class="err" data-for="phone" aria-live="polite"></span>
-          </div>
-        </div>
-        <div class="fld">
-          <label for="f-type">What are you pouring?</label>
-          <select id="f-type" name="project_type" required>
-            <option value="">Choose one</option>
-            <option>Commercial concrete</option>
-            <option>Driveway</option>
-            <option>Slab or foundation</option>
-            <option>Retaining wall</option>
-            <option>Repair or replacement</option>
-            <option>Patio or sidewalk</option>
-          </select>
-          <span class="err" data-for="project_type" aria-live="polite"></span>
-        </div>
-        <div class="fld">
-          <label for="f-details">Size and ZIP <span class="opt">(optional)</span></label>
-          <textarea id="f-details" name="details" rows="3" placeholder="e.g. replace a 24x40 driveway, 37128"></textarea>
-        </div>
-        <button class="btn btn-o submit" type="submit">Get my free estimate</button>
+      <form id="lead" aria-labelledby="quiz-title" hidden>
+        <h2 class="card-h" id="quiz-title">Get your free estimate</h2>
+        <p class="card-s">Tell us about your project. We’ll call to book a free visit.</p>
+        <p class="hp" aria-hidden="true"><label>Leave blank <input name="website" tabindex="-1" autocomplete="off"></label></p>
+        <p id="quiz-selection" class="quiz-selection" hidden></p>
+        <button type="button" id="quiz-back" class="quiz-back" hidden>← Back</button>
+        <div id="quiz-step"></div>
+        <progress id="quiz-progress" class="quiz-progress" max="6" value="1" aria-label="Quiz progress"></progress>
+        <p id="quiz-step-count" class="quiz-step-count"></p>
+        <p id="quiz-status" class="quiz-status" role="status"></p>
         <p class="fine">No obligation. By sending, you agree Murfreesboro Pro Concrete Contractors may call or text you about your project. We never sell your details.</p>
         <p class="alt">Rather talk? Call <a class="js-tel" href="tel:+16293069560">629-306-9560</a></p>
       </form>
+      <p id="quiz-unavailable" hidden>Call <a href="tel:+16293069560">629-306-9560</a> to request your free estimate.</p>
+      <noscript><p>Call <a href="tel:+16293069560">629-306-9560</a> to request your free estimate.</p></noscript>
       <div class="done" id="done" hidden tabindex="-1">
         <h3>Thanks, we have your request.</h3>
         <p>Here is what happens next:</p>
@@ -771,19 +758,14 @@ body{overflow-x:clip}
 </nav>
 
 <script>
-/* ============ SETTINGS: fill these in before launch ============ */
-var CONFIG = {
+window.MurfreesboroAds = {
   googleAdsId: '',          // e.g. 'AW-1234567890' (leave blank to skip loading gtag)
   leadLabel: '',            // conversion label for the form
   phoneConversionLabel: '', // label for "calls from website" (Google forwarding number swaps the number on the page)
   phone: '629-306-9560'
 };
-/* =============================================================== */
 (function () {
-  var d = document, w = window;
-  var form = d.getElementById('lead'), done = d.getElementById('done');
-  var el = form.elements;
-
+  var d = document, w = window, CONFIG = w.MurfreesboroAds;
   /* --- Google Ads (only if configured) --- */
   w.dataLayer = w.dataLayer || [];
   function gtag() { w.dataLayer.push(arguments); }
@@ -794,126 +776,6 @@ var CONFIG = {
     gtag('config', CONFIG.googleAdsId);
     if (CONFIG.phoneConversionLabel) gtag('config', CONFIG.googleAdsId + '/' + CONFIG.phoneConversionLabel, { phone_conversion_number: CONFIG.phone });
   }
-
-  /* --- tracking fields: gclid and UTMs, kept 90 days in case they come back later --- */
-  var p; try { p = new URLSearchParams(location.search); } catch (e) { p = { get: function () { return null; } }; }
-  ['gclid', 'utm_source', 'utm_campaign', 'utm_term'].forEach(function (k) {
-    var v = p.get(k);
-    try { if (v) localStorage.setItem('lp_' + k, JSON.stringify({ v: v, t: Date.now() })); else { var o = JSON.parse(localStorage.getItem('lp_' + k) || 'null'); if (o && Date.now() - o.t < 7776e6) v = o.v; } } catch (e) {}
-    if (v) el[k].value = v.slice(0, 200);
-  });
-  var variant = d.documentElement.getAttribute('data-v') || 'core';
-  el.variant.value = variant;
-  el.landing_url.value = location.href.slice(0, 500);
-
-  /* --- pre-select the project type that matches the ad group --- */
-  var pre = {
-    driveway: 'Driveway',
-    stamped: 'Patio or sidewalk',
-    slab: 'Slab or foundation',
-    rv: 'Slab or foundation',
-    commercial: 'Commercial concrete'
-  }[variant];
-  if (pre) el.project_type.value = pre;
-
-  /* --- sitelink anchors: pre-select the matching project type --- */
-  var hashPre = {
-    '#commercial-services': 'Commercial concrete',
-    '#driveways': 'Driveway',
-    '#foundations': 'Slab or foundation',
-    '#slabs-flatwork': 'Slab or foundation'
-  }[(location.hash || '').toLowerCase()];
-  if (hashPre && !pre) el.project_type.value = hashPre;
-
-  /* --- validation --- */
-  function val(n) { return (el[n].value || '').trim(); }
-  function err(n, msg) { var e = form.querySelector('.err[data-for="' + n + '"]'); if (e) e.textContent = msg || ''; el[n].classList.toggle('bad', !!msg); if (msg) el[n].setAttribute('aria-invalid', 'true'); else el[n].removeAttribute('aria-invalid'); return !msg; }
-  function digits() { var x = val('phone').replace(/\D/g, ''); if (x.length === 11 && x[0] === '1') x = x.slice(1); return x; }
-  var rules = {
-    name: function () { return val('name').length >= 2 ? '' : 'Enter your name.'; },
-    phone: function () { return digits().length === 10 ? '' : 'Enter a 10-digit phone number.'; },
-    project_type: function () { return val('project_type') ? '' : 'Pick the closest match.'; }
-  };
-  Object.keys(rules).forEach(function (n) {
-    el[n].addEventListener('blur', function () { if (val(n)) err(n, rules[n]()); });
-    el[n].addEventListener(el[n].tagName === 'SELECT' ? 'change' : 'input', function () { if (el[n].classList.contains('bad')) err(n, rules[n]()); });
-  });
-  var started = false;
-  form.addEventListener('focusin', function () { if (!started) { started = true; w.dataLayer.push({ event: 'form_start' }); } });
-
-  /* --- lead tier for routing and conversion value --------------------------------
-     Size is read from the optional box ("24x40", "24 by 40", "1,200 sq ft").
-     A = commercial, any slab, or 1,200+ sq ft
-     B = 600 to 1,199 sq ft, or a driveway, patio or retaining wall with no size given
-     C = under 600 sq ft
-     U = no size given and nothing else to go on                                    */
-  function sqft() {
-    var t = val('details').toLowerCase().replace(/,/g, ''), m;
-    if ((m = t.match(/(\d{1,3})\s*(?:x|by|\*|×)\s*(\d{1,4})/))) return (+m[1]) * (+m[2]);
-    if ((m = t.match(/(\d{3,6})\s*(?:sq|square|sf\b)/))) return +m[1];
-    return 0;
-  }
-  function tier() {
-    var type = val('project_type'), a = sqft();
-    el.est_sqft.value = a || '';
-    if (/Commercial|Slab/.test(type) || a >= 1200) return 'A';
-    if (a >= 600) return 'B';
-    if (a > 0) return 'C';
-    if (/Driveway|Patio|Retaining/.test(type)) return 'B';
-    return 'U';
-  }
-
-  /* --- submit to Netlify Forms --- */
-  var sending = false;
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (sending) return;
-    var first = null;
-    Object.keys(rules).forEach(function (n) { if (!err(n, rules[n]()) && !first) first = el[n]; });
-    if (first) { first.focus(); return; }
-    sending = true;
-    el.lead_tier.value = tier();
-    var btn = form.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Sending...';
-    var body = new URLSearchParams(new FormData(form)).toString();
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); })
-      .then(function () {
-        if (CONFIG.googleAdsId && CONFIG.leadLabel) {
-          gtag('set', 'user_data', { phone_number: '+1' + digits() });
-          gtag('event', 'conversion', { send_to: CONFIG.googleAdsId + '/' + CONFIG.leadLabel, value: { A: 300, B: 100, C: 15, U: 60 }[el.lead_tier.value], currency: 'USD' });
-        }
-        w.dataLayer.push({ event: 'lead_submit', lead_tier: el.lead_tier.value, project_type: val('project_type') });
-        form.hidden = true; done.hidden = false; done.focus();
-      })
-      .catch(function () { HTMLFormElement.prototype.submit.call(form); });
-  });
-
-  /* --- project cards fill the form and jump to it --- */
-  function toForm(type) {
-    if (type) { el.project_type.value = type; err('project_type', ''); }
-    d.getElementById('estimate').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(function () { (val('name') ? el.details : el.name).focus({ preventScroll: true }); }, 450);
-  }
-  [].forEach.call(d.querySelectorAll('.js-pick'), function (b) { b.addEventListener('click', function () { toForm(b.getAttribute('data-type')); }); });
-  [].forEach.call(d.querySelectorAll('.js-to-form'), function (a) { a.addEventListener('click', function (e) { e.preventDefault(); toForm(null); }); });
-
-  /* --- add-on buttons write a line into the details box --- */
-  var picked = [], note = d.getElementById('add-note');
-  function writeAddons() {
-    var t = el.details.value.replace(/\n?Also interested in: [^\n]*/, '').replace(/\s+$/, '');
-    if (picked.length) t = (t ? t + '\n' : '') + 'Also interested in: ' + picked.join(', ');
-    el.details.value = t;
-    note.textContent = picked.length ? 'Added to your estimate request: ' + picked.join(', ') + '.' : '';
-  }
-  [].forEach.call(d.querySelectorAll('.js-add'), function (b) {
-    b.addEventListener('click', function () {
-      var k = b.getAttribute('data-add'), i = picked.indexOf(k), on = i < 0;
-      if (on) picked.push(k); else picked.splice(i, 1);
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.lastChild.textContent = on ? 'Added' : 'Add to my estimate';
-      writeAddons();
-    });
-  });
 
   /* --- hide the sticky mobile bar while the form is on screen --- */
   var mbar = d.querySelector('.bar');
