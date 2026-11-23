@@ -10,6 +10,7 @@
   const selection = document.getElementById("quiz-selection");
   const formHandler = window.TitanLeadForm;
   if (!formHandler) {
+    form.hidden = true;
     document.getElementById("quiz-unavailable").hidden = false;
     return;
   }
