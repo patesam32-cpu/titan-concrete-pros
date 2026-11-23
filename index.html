@@ -2,21 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K8CW8HHN');</script>
-<!-- End Google Tag Manager -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18036809609"></script>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "zi6rxvknij");
+<!-- Tracking: Google Tag Manager, Google Ads tag and Microsoft Clarity.
+     Visitors from a Google ad (gclid / gbraid / wbraid / gad_source in the link, or a Google Ads
+     click cookie) get them immediately, so call tracking and conversions work exactly as before.
+     Everyone else gets them on the first scroll, tap, mouse move or key press, or 7 seconds after load. -->
+<script>
+  (function (w, d) {
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+    var srcs = [
+      "https://www.googletagmanager.com/gtm.js?id=GTM-K8CW8HHN",
+      "https://www.googletagmanager.com/gtag/js?id=AW-18036809609",
+      "https://www.clarity.ms/tag/zi6rxvknij"
+    ];
+    var started = false, events = ["scroll", "pointerdown", "touchstart", "keydown", "mousemove"];
+    function start() {
+      if (started) return; started = true;
+      events.forEach(function (e) { w.removeEventListener(e, start); });
+      srcs.forEach(function (src) { var s = d.createElement("script"); s.async = true; s.src = src; d.head.appendChild(s); });
+    }
+    var fromAd = /[?&](gclid|gbraid|wbraid|gad_source)=/.test(w.location.search) || /(^|;\s*)_gcl_(aw|gb|dc)=/.test(d.cookie);
+    if (fromAd) { start(); return; }
+    events.forEach(function (e) { w.addEventListener(e, start, { passive: true }); });
+    w.addEventListener("load", function () { setTimeout(start, 7000); });
+  })(window, document);
 </script>
   <!-- Google tag -->
   <script>
