@@ -8,7 +8,6 @@
   const progress = document.getElementById("quiz-progress");
   const back = document.getElementById("quiz-back");
   const selection = document.getElementById("quiz-selection");
-  const serviceNote = document.getElementById("add-note");
   const formHandler = window.TitanLeadForm;
   if (!formHandler) {
     document.getElementById("quiz-unavailable").hidden = false;
@@ -63,7 +62,6 @@
   const variant = document.documentElement.dataset.v || "core";
   const ads = window.MurfreesboroAds || {};
   const answers = { project: variantProjects.get(variant) || hashProjects.get(location.hash.toLowerCase()) || "", notes: "" };
-  const addons = new Set();
   let requestedService = variant === "rv" ? "RV pad or extra parking" : "";
   let stepIndex = 0;
   let sending = false;
@@ -224,7 +222,7 @@
     const projectId = answers.project;
     const project = projects.find(([id]) => id === projectId);
     const service = requestedService || (projectId === "commercial" ? "Commercial Concrete Services" : "");
-    const notes = [answers.notes, addons.size ? "Also interested in: " + [...addons].join(", ") : ""].filter(Boolean).join("\n");
+    const notes = answers.notes;
     const phone = answers.phone.replace(/[^0-9]/g, "");
     const payload = formHandler.buildPayload({
       ...answers, phone, notes, project: projectId === "commercial" ? "other" : projectId
@@ -279,15 +277,6 @@
   document.querySelectorAll(".js-to-form").forEach((link) => link.addEventListener("click", (event) => {
     event.preventDefault();
     showQuote();
-  }));
-  document.querySelectorAll(".js-add").forEach((button) => button.addEventListener("click", () => {
-    const addon = button.dataset.add;
-    const on = !addons.has(addon);
-    if (on) addons.add(addon);
-    else addons.delete(addon);
-    button.setAttribute("aria-pressed", String(on));
-    button.lastChild.textContent = on ? "Added" : "Add to my estimate";
-    serviceNote.textContent = addons.size ? "Added to your estimate request: " + [...addons].join(", ") + "." : "";
   }));
 
   form.hidden = false;
