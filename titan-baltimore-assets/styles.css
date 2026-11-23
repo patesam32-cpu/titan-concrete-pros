@@ -214,3 +214,20 @@ summary { cursor: pointer; font-weight: 750; }
 .recent-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.6rem, 1.6vw, 1.1rem); max-width: 1100px; margin-inline: auto; }
 .recent-grid figure { margin: 0; overflow: hidden; border-radius: clamp(.6rem, 1.4vw, 1rem); background: #1e1e1e; aspect-ratio: 4 / 3; }
 .recent-grid img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Sticky header: logo, Call and Free estimate stay in view on every screen size */
+.masthead { position: sticky; top: 0; z-index: 20; box-shadow: 0 1px 0 var(--line), 0 6px 16px #19191712; }
+html { scroll-padding-top: 96px; }
+@media (max-width: 670px) {
+  html { scroll-padding-top: 72px; scroll-padding-bottom: 0; }
+  .masthead { border-top-width: 3px; }
+  .masthead-inner { min-height: 0; padding-block: .55rem; gap: .4rem; }
+  .brand img { width: clamp(92px, 27vw, 132px); }
+  .top-actions { gap: .35rem; }
+  .top-actions a[data-phone] { display: inline-flex; }
+  .masthead .button { min-height: 40px; gap: .3rem; font-size: clamp(.68rem, 3.2vw, .82rem); padding-inline: clamp(.4rem, 1.8vw, .6rem); }
+  .masthead .button [aria-hidden="true"] { display: none; }
+  /* the header now carries both buttons, so the bottom bar would only repeat them */
+  .mobile-actions { display: none; }
+  .footer { padding-bottom: 1.5rem; }
+}
