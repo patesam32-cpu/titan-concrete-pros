@@ -116,13 +116,16 @@ for (const [name, description] of company.finishes) {
 }
 byId("finishes").hidden = company.finishes.length === 0;
 
-for (const [index, project] of company.projects.entries()) {
-  const figure = node("figure");
-  figure.append(photoBox(project, project.caption + " photo", sectionPhotoSizes), node("figcaption", project.caption));
-  byId(index < 4 ? "project-grid" : "more-project-grid").append(figure);
+// Pages with the static "recent work" photo grid don't have these containers.
+if (byId("project-grid")) {
+  for (const [index, project] of company.projects.entries()) {
+    const figure = node("figure");
+    figure.append(photoBox(project, project.caption + " photo", sectionPhotoSizes), node("figcaption", project.caption));
+    byId(index < 4 ? "project-grid" : "more-project-grid").append(figure);
+  }
+  byId("more-projects").hidden = company.projects.length <= 4;
+  byId("project-grid").hidden = company.projects.length === 0;
 }
-byId("more-projects").hidden = company.projects.length <= 4;
-byId("project-grid").hidden = company.projects.length === 0;
 
 for (const stat of company.stats) {
   const item = node("div");
