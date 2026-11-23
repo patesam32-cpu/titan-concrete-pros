@@ -9,6 +9,8 @@ window.COMPANY = {
   intro: "Driveways, patios, pool decks, sidewalks and walkways poured right the first time. We also pour slabs, flatwork, equipment pads, foundations, footings and concrete walls, including retaining walls. We install waterproofing systems and handle **repair, cleaning, pressure washing and sealing**. Choose from brush finishes, exposed aggregate, stamped concrete and epoxy coatings. Licensed, insured and locally owned, with a **clear, upfront price** before any work begins.",
   phone: "+1 463-283-6867",
   email: "quotes@titanconcretepros.com",
+  // After a successful form submission, visitors are sent here (same tab, keeps ?gclid/utm query).
+  thankYouUrl: "/carmel-fishers-thank-you",
   hours: "8am–6pm",
   logo: "titan-baltimore-assets/images/logo.webp",
   stats: [

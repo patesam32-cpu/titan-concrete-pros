@@ -253,9 +253,19 @@
     const tier = leadTier(answers.notes, projectId);
     window.dataLayer.push({ event: "lead_submit", lead_tier: tier, project_type: service || project[1] });
     window.dataLayer.push({ event: "generate_lead", project_type: project[1] });
+    // Lead is confirmed saved: open the thank-you page in the same tab (keeps ?gclid/utm query).
+    let redirected = false;
+    const goToThankYou = () => {
+      if (redirected) return;
+      redirected = true;
+      window.location.href = "/murfreesboro-thank-you" + location.search;
+    };
     if (ads.googleAdsId && ads.leadLabel && typeof window.gtag === "function") {
       window.gtag("set", "user_data", { phone_number: phone.length === 10 ? "+1" + phone : "+" + phone });
-      window.gtag("event", "conversion", { send_to: ads.googleAdsId + "/" + ads.leadLabel, value: { A: 300, B: 100, C: 15, U: 60 }[tier], currency: "USD" });
+      window.gtag("event", "conversion", { send_to: ads.googleAdsId + "/" + ads.leadLabel, value: { A: 300, B: 100, C: 15, U: 60 }[tier], currency: "USD", event_callback: goToThankYou });
+      setTimeout(goToThankYou, 1000); // don't wait on Google longer than 1 second
+    } else {
+      goToThankYou();
     }
   });
 

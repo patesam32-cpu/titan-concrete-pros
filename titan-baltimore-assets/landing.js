@@ -350,6 +350,13 @@ form.addEventListener("submit", async (event) => {
     return;
   }
   completed = true;
+  if (company.thankYouUrl) {
+    // Lead is confirmed saved: record it, then open the thank-you page in the same tab.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "generate_lead", project_type: project.label });
+    window.location.href = company.thankYouUrl + location.search;
+    return;
+  }
   form.hidden = true;
   byId("selection").hidden = true;
   const confirmation = node("h3", "Your estimate request is in.", "step-title");
