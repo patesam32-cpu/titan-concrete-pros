@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8">
 <script>
-    /* Tracking: Microsoft Clarity and the Google tag load on the visitor's first scroll, tap or key press,
+    /* Tracking: Google Tag Manager, Microsoft Clarity, and the Google tag load on the visitor's first scroll, tap or key press,
        or 7 seconds after the page loads, so they don't slow down the page. Calls made before then are queued. */
     (function (w, d) {
       w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+      w.dataLayer = w.dataLayer || []; w.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       var started = false, events = ["scroll", "pointerdown", "touchstart", "keydown"];
       function start() {
         if (started) return; started = true;
         events.forEach(function (e) { w.removeEventListener(e, start); });
         var c = d.createElement("script"); c.async = true;
         c.src = "https://www.clarity.ms/tag/zi6rxvknij"; d.head.appendChild(c);
+        var t = d.createElement("script"); t.async = true;
+        t.src = "https://www.googletagmanager.com/gtm.js?id=GTM-K8CW8HHN"; d.head.appendChild(t);
         var g = d.createElement("script"); g.async = true;
         g.src = "https://www.googletagmanager.com/gtm.js?id=AW-18036809609"; d.head.appendChild(g);
       }
@@ -64,6 +67,9 @@
   </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8CW8HHN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <main>
     <h1>Titan Concrete Pros</h1>
     <p>Residential and commercial concrete work. We pour driveways, patios, sidewalks, slabs, foundations and concrete walls.</p>
