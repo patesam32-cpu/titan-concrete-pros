@@ -1,24 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script type="text/javascript">
-    /* Microsoft Clarity: loads after the page finishes so it doesn't affect page speed. */
-    window.addEventListener("load", function () {
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "zi6rxvknij");
-    });
-</script>
+<meta charset="utf-8">
+<script>
+    /* Tracking: Microsoft Clarity and the Google tag load on the visitor's first scroll, tap or key press,
+       or 7 seconds after the page loads, so they don't slow down the page. Calls made before then are queued. */
+    (function (w, d) {
+      w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+      var started = false, events = ["scroll", "pointerdown", "touchstart", "keydown"];
+      function start() {
+        if (started) return; started = true;
+        events.forEach(function (e) { w.removeEventListener(e, start); });
+        var c = d.createElement("script"); c.async = true;
+        c.src = "https://www.clarity.ms/tag/zi6rxvknij"; d.head.appendChild(c);
+        var g = d.createElement("script"); g.async = true;
+        g.src = "https://www.googletagmanager.com/gtm.js?id=AW-18036809609"; d.head.appendChild(g);
+      }
+      events.forEach(function (e) { w.addEventListener(e, start, { passive: true }); });
+      w.addEventListener("load", function () { setTimeout(start, 7000); });
+    })(window, document);
+  </script>
   <!-- Google tag -->
-  <script async src="https://www.googletagmanager.com/gtm.js?id=AW-18036809609"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
   </script>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Concrete Contractor in Baltimore, MD | Titan Concrete Pros</title>
   <meta name="description" content="Request a free estimate from Titan Concrete Pros for driveways, sidewalks, patios, slabs, footings, foundations, concrete walls and waterproofing in Maryland.">

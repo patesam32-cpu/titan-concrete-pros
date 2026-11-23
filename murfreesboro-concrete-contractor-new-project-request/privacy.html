@@ -1,17 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script type="text/javascript">
-    /* Microsoft Clarity: loads after the page finishes so it doesn't affect page speed. */
-    window.addEventListener("load", function () {
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "zi6rxvknij");
-    });
-</script>
 <meta charset="utf-8">
+<script>
+    /* Tracking: Microsoft Clarity loads on the visitor's first scroll, tap or key press,
+       or 7 seconds after the page loads, so they don't slow down the page. Calls made before then are queued. */
+    (function (w, d) {
+      w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+      var started = false, events = ["scroll", "pointerdown", "touchstart", "keydown"];
+      function start() {
+        if (started) return; started = true;
+        events.forEach(function (e) { w.removeEventListener(e, start); });
+        var c = d.createElement("script"); c.async = true;
+        c.src = "https://www.clarity.ms/tag/zi6rxvknij"; d.head.appendChild(c);
+      }
+      events.forEach(function (e) { w.addEventListener(e, start, { passive: true }); });
+      w.addEventListener("load", function () { setTimeout(start, 7000); });
+    })(window, document);
+  </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#2B2B2A">
