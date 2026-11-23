@@ -51,6 +51,7 @@ p { max-width: 67ch; }
 .hero em { color: var(--orange); font-style: normal; }
 .hero .eyebrow { color: var(--orange); }
 .lead { color: #ece5dc; margin-top: .9rem; max-width: 44ch; }
+.lead strong { color: white; }
 .hero-points { list-style: none; display: flex; gap: .3rem 1rem; flex-wrap: wrap; padding: 0; margin: .95rem 0; font-size: .86rem; font-weight: 700; }
 .hero-points li::before { content: "✓"; color: var(--orange); margin-right: .35rem; }
 .media { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 16 / 10; padding: .75rem; border: 1px solid #cfc5b8; background: repeating-linear-gradient(135deg, #ebe4d9 0 12px, #e7dfd2 12px 24px); color: #504438; font-size: .83rem; text-align: center; }
@@ -116,14 +117,13 @@ html:has(.service-card:target, #residential-services:target, #commercial-service
 .card-body { display: flex; flex-direction: column; align-items: start; flex: 1; padding: 1.15rem; }
 .card-body p { margin: .55rem 0 .95rem; color: var(--muted); }
 .card-body a { margin-top: auto; color: var(--burnt); font-weight: 800; }
-.commercial-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .9rem; margin-top: 1.5rem; padding: 1.25rem; border: 1px solid var(--line); }
-.commercial-card p { margin-top: .45rem; color: var(--muted); }
 .finish-panel { display: grid; grid-template-columns: 1fr 2fr; gap: 1.6rem; margin-top: 1.5rem; padding: 1.5rem; border-left: 5px solid var(--orange); background: var(--sand); }
 .finish-panel dl, .benefit-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
 .finish-panel dt { font-weight: 800; }
 .finish-panel dd { color: var(--muted); }
 .projects, .reviews { background: var(--sand); }
 .gallery-note { margin-top: .65rem; color: var(--muted); }
+.projects-call { margin-top: 1rem; }
 .project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin-top: 1.6rem; }
 .more-projects { margin-top: 1rem; }
 .more-projects > summary { color: var(--burnt); }
@@ -147,6 +147,9 @@ html:has(.service-card:target, #residential-services:target, #commercial-service
 .strip-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
 .local-grid .eyebrow { color: var(--burnt); margin: 0 0 .8rem; }
 .local-grid h2 { font-size: clamp(1.65rem, 3.4vw, 2.4rem); }
+.coverage-map { margin: 1.1rem 0; }
+.coverage-map img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
+.coverage-map figcaption { margin-top: .4rem; color: var(--muted); font-size: .82rem; }
 .locations { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; padding: 0; }
 .locations li { background: var(--sand); padding: .28rem .65rem; font-size: .87rem; }
 #faq { margin-top: .7rem; }

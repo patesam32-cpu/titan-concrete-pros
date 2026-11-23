@@ -6,7 +6,7 @@ window.COMPANY = {
   marketLine: "Gaithersburg to West Baltimore · Maryland",
   headline: "Baltimore's Top-Rated Residential & Commercial",
   headlineAccent: "Concrete Contractor",
-  intro: "We pour driveways, patios, slabs, foundations and concrete walls for homeowners and businesses. I’m the owner of Titan Concrete Pros. I write every estimate and manage every job.",
+  intro: "Driveways, patios, pool decks, sidewalks and walkways poured right the first time. We also pour slabs, flatwork, equipment pads, foundations, footings and concrete walls, including retaining walls. We install waterproofing systems and handle **repair, cleaning, pressure washing and sealing**. Choose from brush finishes, exposed aggregate, stamped concrete and epoxy coatings. Licensed, insured and locally owned, with a **clear, upfront price** before any work begins.",
   phone: "443-963-3664",
   email: "quotes@titanconcretepros.com",
   hours: "8am–6pm",
@@ -29,6 +29,7 @@ window.COMPANY = {
   services: [
     { id: "driveway", anchor: "Driveways", title: "Concrete Driveways", estimate: "Get a driveway estimate", project: "driveways", description: "New and replacement driveways, with the slope, base and joints planned around how you park and where rainwater needs to go.", src: "titan-baltimore-assets/images/service-driveways.webp", alt: "Concrete driveway curving past a landscaped lawn" },
     { id: "sidewalk", anchor: "Sidewalks", title: "Sidewalks & Walkways", estimate: "Get a sidewalk or walkway estimate", project: "walkways", description: "Front walks, side paths and sidewalks laid out around steps, gates and the way you move through the property.", src: "titan-baltimore-assets/images/service-walkways.webp", alt: "Curving concrete walkway through landscaped beds" },
+    { id: "commercial", anchor: "commercial-services", title: "Commercial Concrete Services", estimate: "Get a commercial estimate", project: "other", description: "We pour equipment pads, slabs, walkways and concrete walls for Maryland businesses. I handle the estimate and coordinate site access and the pour schedule with you.", src: "titan-baltimore-assets/images/service-commercial.webp", alt: "Concrete apron in front of two commercial shop bays" },
     { id: "patio", anchor: "Patios", title: "Patios & Pool Decks", estimate: "Get a patio or pool deck estimate", project: "patios", description: "Concrete patios and pool surrounds with finish and drainage options suited to outdoor seating and bare feet.", src: "titan-baltimore-assets/images/service-patios-pools.webp", alt: "Covered patio furnished with outdoor seating" },
     { id: "slab", anchor: "slabs-flatwork", title: "Slabs & Flatwork", estimate: "Get a slab estimate", project: "slabs", description: "We pour concrete slabs and flatwork for businesses and homeowners, including commercial equipment pads, garage slabs and shed pads. We plan the pour around what the slab will support and how you’ll access it.", src: "titan-baltimore-assets/images/service-slabs.webp", alt: "Concrete flatwork in front of garage bays" },
     { id: "foundation", anchor: "foundations", title: "Foundations & Footings", estimate: "Get a foundation or footing estimate", project: "foundation", description: "Poured foundations and footings for new construction and additions. We can discuss drainage and waterproofing where concrete will sit below grade.", src: "titan-baltimore-assets/images/service-foundations.webp", alt: "Concrete foundation formwork and steel reinforcement before a pour" },
@@ -54,13 +55,7 @@ window.COMPANY = {
     { id: "other", label: "Other", icon: "dots" }
   ],
   projects: [
-    { src: "titan-baltimore-assets/images/project-1-driveway.webp", caption: "Curved driveway", alt: "A curved concrete driveway leading to a house" },
-    { src: "titan-baltimore-assets/images/project-2-patio.webp", caption: "Covered patio", alt: "Concrete patio underneath a deck" },
-    { src: "titan-baltimore-assets/images/project-3-walkway.webp", caption: "Concrete access ramp", alt: "Concrete access ramp with metal railings" },
-    { src: "titan-baltimore-assets/images/project-4-loading-area.webp", caption: "Concrete loading area", alt: "Concrete loading platform and ramp at a commercial building" },
-    { src: "titan-baltimore-assets/images/project-5-steps.webp", caption: "Front walk and entry", alt: "Concrete walkway and entry steps at a brick house" },
-    { src: "titan-baltimore-assets/images/project-6-commercial-slab.webp", caption: "Concrete shop apron", alt: "Concrete approach in front of a shop building" },
-    { src: "titan-baltimore-assets/images/project-7-decorative-concrete.webp", caption: "Decorative patio", alt: "Decorative concrete patio with outdoor seating" }
+    // Add only verified Titan project photos. Use src, caption and alt for each photo.
   ],
   faqs: [
     ["How much does a concrete driveway cost?", "The estimate depends on the area, demolition, access, base work and finish. Tell us whether you’re replacing an existing driveway or pouring a new one so we can price the right scope."],

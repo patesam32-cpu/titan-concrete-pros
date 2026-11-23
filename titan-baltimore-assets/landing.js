@@ -30,7 +30,11 @@ const phoneNumber = phoneDigits.length === 10 ? "+1" + phoneDigits : company.pho
 setText("[data-company]", company.name);
 setText("[data-market]", company.market);
 setText("[data-market-line]", company.marketLine);
-setText("[data-intro]", company.intro);
+const intro = document.querySelector("[data-intro]");
+const introParts = company.intro.split(/\*\*(.+?)\*\*/);
+intro.replaceChildren(...introParts.map((part, index) =>
+  index % 2 ? node("strong", part) : document.createTextNode(part)
+));
 setText("#area-title", company.areaHeading);
 setText("#area-copy", company.areaCopy);
 setText("#footer-location", company.footerLocation);
@@ -118,6 +122,7 @@ for (const [index, project] of company.projects.entries()) {
   byId(index < 4 ? "project-grid" : "more-project-grid").append(figure);
 }
 byId("more-projects").hidden = company.projects.length <= 4;
+byId("project-grid").hidden = company.projects.length === 0;
 
 for (const stat of company.stats) {
   const item = node("div");
